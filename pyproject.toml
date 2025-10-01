@@ -1,0 +1,14 @@
+[project]
+name = "weblog-threat-hunter"
+version = "0.1.0"
+description = "Parse Apache logs and flag common attacker behaviors with a clean report."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{name = "Lauren Roberts"}]
+
+[project.scripts]
+webloghunter = "webloghunter.cli:main"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
