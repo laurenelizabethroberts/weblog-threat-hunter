@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: weblog-threat-hunter
+Version: 0.1.0
+Summary: Parse Apache logs and flag common attacker behaviors with a clean report.
+Author: Lauren Roberts
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+# Web Log Threat Hunter
+
+A compact blue-team tool that parses Apache access logs, detects common attack patterns (bruteforce, dirbusting, SQLi, LFI/RFI, shellshock, malicious UAs), and exports CSV/Markdown reports.

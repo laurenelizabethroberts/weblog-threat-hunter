@@ -1,0 +1,12 @@
+# thresholds
+dirbust_threshold: 8
+bruteforce_threshold: 4
+
+# rate window in seconds (per-bucket logic)
+window_seconds: 60
+
+# customize login-ish paths
+login_hints:
+  - "/login"
+  - "/admin"
+  - "/wp-login.php"
