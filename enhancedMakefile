@@ -1,0 +1,53 @@
+# Makefile
+# Web Log Threat Hunter - Makefile
+# Common commands to simplify development & usage
+
+PYTHON := python3
+VENV := .venv
+ACTIVATE := . $(VENV)/bin/activate
+
+# Default help
+help:
+	@echo "Available commands:"
+	@echo "  make venv       - Create virtual environment"
+	@echo "  make install    - Install dependencies"
+	@echo "  make run        - Run the tool on sample logs"
+	@echo "  make clean      - Remove generated files"
+	@echo "  make lint       - Run code style checks (flake8)"
+	@echo "  make test       - Run test suite (pytest)"
+
+# Create virtual environment
+venv:
+	$(PYTHON) -m venv $(VENV)
+
+# Install dependencies
+install: venv
+	$(ACTIVATE) && pip install -r requirements.txt
+
+# Run the tool with sample config and logs
+run:
+	$(ACTIVATE) && $(PYTHON) webloghunter.py -i samples/access.log -o reports -c config.sample.yaml --top-talkers 5
+
+# Remove caches, reports, and venv
+clean:
+	rm -rf __pycache__ reports/* .pytest_cache .venv
+
+# Linting (code style)
+lint:
+	$(ACTIVATE) && pip install flake8 && flake8 .
+
+# Run tests (if you add tests/)
+test:
+	$(ACTIVATE) && pip install pytest && pytest tests/
+
+# How it Works
+
+* make venv → creates a Python virtual environment
+
+* make install → installs dependencies from requirements.txt
+
+* make run → runs your tool against the sample log + sample config (great demo!)
+
+* make clean → clears reports, cache, and venv
+
+* make lint / make test → optional, for contributors
