@@ -4,7 +4,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
 
-Overview
+# Overview
 
 The Web Log Threat Hunter project is a security analysis tool designed to help security analysts and researchers quickly detect potential threats within web server logs. It focuses on identifying suspicious patterns such as brute-force attempts, SQL injection probes, directory traversal, and other common attack techniques.
 
@@ -30,21 +30,21 @@ Features
 
 * Export results to structured reports
 
-Installation
+# Installation
 
 Clone the repository and set up your environment:
 git clone https://github.com/USERNAME/web-log-threat-hunter.git
 cd web-log-threat-hunter
 
-# Create a virtual environment
+# Create a Virtual Environment
 python -m venv .venv
 source .venv/bin/activate   # Linux/Mac
 .venv\Scripts\activate      # Windows
 
-# Install requirements
+# Install Requirements
 pip install -r requirements.txt
 
-Usage
+# Usage
 python webloghunter.py -i samples/access.log -o reports -c config.yaml --top-talkers 5
 Options:
 
@@ -55,6 +55,18 @@ Options:
 -c → Config file for detection rules
 
 --top-talkers → Number of top IPs/endpoints to display
+
+# Configuration
+This project uses a YAML file to define detection rules.
+A sample file is included: config.sample.yaml.
+
+To use it, copy and rename:
+cp config.sample.yaml config.yaml
+
+Then run the tool with:
+python webloghunter.py -i samples/access.log -o reports -c config.yaml
+
+You can edit config.yaml to add or remove detection rules. Each rule uses regex patterns to catch suspicious requests (SQLi, XSS, brute force, etc.).
 
 # Example Output:
 [INFO] Processing logs...
