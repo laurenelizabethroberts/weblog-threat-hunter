@@ -3,4 +3,98 @@
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-A compact blue-team tool that parses Apache access logs, detects common attack patterns (bruteforce, dirbusting, SQLi, LFI/RFI, shellshock, malicious UAs), and exports CSV/Markdown reports.
+
+Overview
+
+The Web Log Threat Hunter project is a security analysis tool designed to help security analysts and researchers quickly detect potential threats within web server logs. It focuses on identifying suspicious patterns such as brute-force attempts, SQL injection probes, directory traversal, and other common attack techniques.
+
+This tool provides actionable insights by highlighting top talkers, anomalous requests, error patterns, and suspicious IP addresses to accelerate incident response and threat hunting.
+
+Features
+
+* Parse and analyze Apache/Nginx web logs
+
+* Detect suspicious activity such as:
+
+  * SQL injection attempts
+
+  * XSS payloads
+
+  * Directory traversal patterns
+
+  * Authentication brute-force
+
+* Generate summary reports with top talkers (IP, user agents, endpoints)
+
+* CLI-based for fast triage
+
+* Export results to structured reports
+
+Installation
+
+Clone the repository and set up your environment:
+git clone https://github.com/USERNAME/web-log-threat-hunter.git
+cd web-log-threat-hunter
+
+# Create a virtual environment
+python -m venv .venv
+source .venv/bin/activate   # Linux/Mac
+.venv\Scripts\activate      # Windows
+
+# Install requirements
+pip install -r requirements.txt
+
+Usage
+python webloghunter.py -i samples/access.log -o reports -c config.yaml --top-talkers 5
+Options:
+
+-i → Input log file
+
+-o → Output directory for reports
+
+-c → Config file for detection rules
+
+--top-talkers → Number of top IPs/endpoints to display
+
+# Example Output:
+[INFO] Processing logs...
+[INFO] Top 5 IP addresses:
+   192.168.1.20 (230 requests)
+   203.0.113.45 (195 requests, flagged: brute force)
+[INFO] Suspicious patterns detected: 4
+   - SQL injection attempt from 203.0.113.45
+   - Directory traversal from 198.51.100.12
+
+# Project Structure
+web-log-threat-hunter/
+
+├── samples/              # Example log files
+
+├── reports/              # Generated reports
+
+├── config.sample.yaml    # Example configuration
+
+├── webloghunter.py       # Main script
+
+├── requirements.txt      # Dependencies
+
+└── README.md             # Project documentation
+
+
+# Use Cases
+* Security Operations Centers (SOC) for rapid log triage
+
+* Incident response teams analyzing suspicious traffic
+
+* Blue-teamers building detection playbooks
+
+* Cybersecurity students practicing log analysis
+
+
+# License
+
+Distributed under the MIT License. See LICENSE for more information.
+
+
+
+
