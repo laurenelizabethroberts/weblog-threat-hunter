@@ -3,3 +3,25 @@ __pycache__/
 .venv/
 reports/
 .DS_Store
+
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# OS-specific
+Thumbs.db
