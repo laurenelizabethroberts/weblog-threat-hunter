@@ -1,12 +1,50 @@
-# thresholds
-dirbust_threshold: 8
-bruteforce_threshold: 4
+# Web Log Threat Hunter - Sample Configuration
+# Adjust or expand rules as needed for your environment.
 
-# rate window in seconds (per-bucket logic)
-window_seconds: 60
+rules:
 
-# customize login-ish paths
-login_hints:
-  - "/login"
-  - "/admin"
-  - "/wp-login.php"
+  # Detect possible SQL injection attempts
+  - name: SQL Injection
+    description: Detects common SQLi patterns in requests
+    regex:
+      - "('.+--)|(\\b(SELECT|UNION|INSERT|UPDATE|DELETE|DROP|OR|AND)\\b)"
+      - "(%27)|(%22)|(%3D)"   # Encoded quotes or equals
+    severity: high
+
+  # Detect possible Cross-Site Scripting (XSS)
+  - name: Cross-Site Scripting (XSS)
+    description: Detects suspicious script injections
+    regex:
+      - "<script.*?>.*?</script.*?>"
+      - "(javascript:|onerror=|onload=)"
+    severity: medium
+
+  # Detect directory traversal attempts
+  - name: Directory Traversal
+    description: Detects attempts to navigate outside web root
+    regex:
+      - "\\.\\./"
+      - "%2e%2e%2f"
+    severity: high
+
+  # Detect brute-force login attempts
+  - name: Brute Force Login
+    description: Flag repeated failed login requests
+    regex:
+      - "/login"
+      - "401 Unauthorized"
+    severity: medium
+    threshold: 5   # Trigger alert if 5+ attempts from same IP
+
+  # Detect scanning/probing tools
+  - name: Reconnaissance/Scanning
+    description: Detects common automated scanners
+    regex:
+      - "(nikto|sqlmap|nmap|curl|wget|python-requests)"
+    severity: low
+
+# General Settings
+output:
+  format: json    # Options: json, csv, txt
+  report_top: 10  # Number of top IPs, user agents, endpoints
+
