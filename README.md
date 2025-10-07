@@ -33,8 +33,7 @@ Features
 # Installation
 
 Clone the repository and set up your environment:
-git clone https://github.com/USERNAME/web-log-threat-hunter.git
-cd web-log-threat-hunter
+git clone https://github.com/laurenelizabethroberts/weblog-threat-hunter.git
 
 # Create a Virtual Environment
 python -m venv .venv
