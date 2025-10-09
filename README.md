@@ -30,22 +30,24 @@ Features
 
 * Export results to structured reports
 
-# Installation
+# How to Run:
+
+## Installation
 
 Clone the repository and set up your environment:
 git clone https://github.com/laurenelizabethroberts/weblog-threat-hunter.git
 
-# Create a Virtual Environment
+## Create a Virtual Environment
 python -m venv .venv
 source .venv/bin/activate   # Linux/Mac
 .venv\Scripts\activate      # Windows
 
-# Install Requirements
+## Install Dependencies
 pip install -r requirements.txt
 
-# Usage
+## Run the Tool
 python webloghunter.py -i samples/access.log -o reports -c config.yaml --top-talkers 5
-Options:
+Options (arguments explained):
 
 -i → Input log file
 
@@ -54,6 +56,11 @@ Options:
 -c → Config file for detection rules
 
 --top-talkers → Number of top IPs/endpoints to display
+You can edit config.yaml to add or remove detection rules. Each rule uses regex patterns to catch suspicious requests (SQLi, XSS, brute force, etc.).
+
+## View the Results
+The tool generates a markdown or CSV report in the reports/ folder.
+reports/example.md
 
 # Detection Coverage
 
@@ -64,18 +71,6 @@ Options:
 | Path Traversal | Detect `../` or `\..\` | `traversal` | T1006 |
 | Reconnaissance scans | Count unique IPs per endpoint | `scanner` | T1595 |
 | Data exfil volume | Bytes > threshold per IP | `exfil` | T1567 |
-
-# Configuration
-This project uses a YAML file to define detection rules.
-A sample file is included: config.sample.yaml.
-
-To use it, copy and rename:
-cp config.sample.yaml config.yaml
-
-Then run the tool with:
-python webloghunter.py -i samples/access.log -o reports -c config.yaml
-
-You can edit config.yaml to add or remove detection rules. Each rule uses regex patterns to catch suspicious requests (SQLi, XSS, brute force, etc.).
 
 # Example Output:
 [INFO] Processing logs...
