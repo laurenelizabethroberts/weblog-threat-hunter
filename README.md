@@ -55,6 +55,16 @@ Options:
 
 --top-talkers → Number of top IPs/endpoints to display
 
+# Detection Coverage
+
+| Pattern Type | Detection Method | Output Field | MITRE ATT&CK |
+|---------------|-----------------|---------------|---------------|
+| Brute-force login | Regex on `/login` + 401 codes > X | `failed_auth` | T1110 |
+| SQL injection | Regex for `(\%27)|(')|(--)|(\%23)` | `sql_injection` | T1190 |
+| Path Traversal | Detect `../` or `\..\` | `traversal` | T1006 |
+| Reconnaissance scans | Count unique IPs per endpoint | `scanner` | T1595 |
+| Data exfil volume | Bytes > threshold per IP | `exfil` | T1567 |
+
 # Configuration
 This project uses a YAML file to define detection rules.
 A sample file is included: config.sample.yaml.
